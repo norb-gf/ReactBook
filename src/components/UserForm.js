@@ -9,7 +9,6 @@ class UserForm extends Component {
 
     return (
       <div>
-        <h1>Em qualquer lugar deste component</h1>
         <Formik
           initialValues={{ email: "", password: "" }}
 
@@ -41,7 +40,6 @@ class UserForm extends Component {
                   alert(JSON.stringify(values, null, 2));
                   setSubmitting(false);
                 }, 400);
-                  // <GitHubAPP />
             }
           }
         >
