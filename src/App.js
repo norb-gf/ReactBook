@@ -3,6 +3,8 @@ import Products from "./components/Products";
 import { Button } from 'react-bootstrap'
 import Rating from './components/Rating'
 import JumboTronComponent from './components/JumboTronComponent'
+import UserForm from './components/UserForm'
+import GitHubAPP from './services/GitHubAPI'
 
 class App extends Component {
   render() {
@@ -12,10 +14,12 @@ class App extends Component {
 
     return (
       <div className="App">
+        <UserForm />
+        <GitHubAPP />
         <JumboTronComponent>
           This is a long text that will extends more than a few steps. A people, a lot of people
           that have sleep yesterday
-        </JumboTronComponent> />
+        </JumboTronComponent>
         <Products />
         <Rating rating="1" />
         <Rating rating="5" />
