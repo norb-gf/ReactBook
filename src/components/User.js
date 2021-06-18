@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import UserService from "../services/UserService";
 import { Button } from "react-bootstrap";
 
-import "../css/User.css";
+import formataData from '../utils/FormataData'
+import "../css/styles.css";
 
 class User extends Component {
   constructor(props) {
@@ -15,7 +16,6 @@ class User extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
-    // this.formataData = this.formataData.bind(this);
   }
 
   componentDidMount = () => {
@@ -29,16 +29,7 @@ class User extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    this.props.history.push("/users");
-  };
-
-  formataData = (wdata) => {
-    let dataFormatada = "";
-    if (wdata) {
-      dataFormatada =
-        wdata.substr(8, 2) + "-" + wdata.substr(5, 3) + wdata.substr(0, 4);
-    }
-    return dataFormatada;
+    this.props.history.push("/users/list");
   };
 
   render() {
@@ -51,7 +42,7 @@ class User extends Component {
         <p>First Name: {this.state.user.firstName}</p>
         <p>Last Name: {this.state.user.lastName}</p>
         <p>Email: {this.state.user.emailId}</p>
-        <p>Data Ult Alt: {this.formataData(this.state.user.dataUltAlt)}</p>
+        <p>Data Ult Alt: {formataData(this.state.user.dataUltAlt)}</p>
         <Button variant="primary" onClick={this.handleClick}>
           Go to Users List
         </Button>

@@ -12,10 +12,8 @@ class Footer extends Component {
 
     render() {
         return (
-            <div>
-                <footer className = "footer">
+            <div className="footer">
                     <span>Mensagem de rodapé</span>
-                </footer>
             </div>
         )
     }

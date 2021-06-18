@@ -5,13 +5,13 @@ padding: 0;
 
 h5 {
 align-items:  flex-start;
-color: red;    
+color: blue;    
 }
 
 .footer {
   margin-top: 2rem;
-  background-color: rgb(33, 95, 119,0.1);
-  color: black;
+  background-color: rgb(61, 116, 138);
+  color: white;
   position: relative;
   bottom: 0;
   width: 100%;
@@ -20,6 +20,6 @@ color: red;
   font-size: 1.25rem;
   text-align: left;
   padding: 11px 0 0 50px;
-  border-top: 1px solid rgb(33,95,119,0.3);
-  
+  border-top: 1px solid rgb(61, 116, 138);
+  z-index:   1;
 }

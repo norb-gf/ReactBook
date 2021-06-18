@@ -11,6 +11,7 @@ color: black;
 .footer {
   margin-top: 2rem;
   background-color: rgb(33, 95, 119,0.1);
+  /* background-color: red; */
   color: black;
   position:  fixed;
   bottom: 0;

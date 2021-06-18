@@ -1,8 +1,8 @@
 import { Component } from "react";
-// import axios from "axios";
 import ReactLoading from "react-loading";
 import { Media, Form, Nav, Button } from "react-bootstrap";
 import UserService from "../services/UserService";
+// import axios from "axios";
 
 import "../css/styles.css";
 
@@ -10,7 +10,7 @@ class UserList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      users: [],
       searchTerm: "",
       isLoading: false,
       errorText: "",
@@ -24,7 +24,7 @@ class UserList extends Component {
   componentDidMount() {
     UserService.getUsers().then((res) => {
       this.setState({
-        data: res.data,
+        users: res.data,
         isLoading: false,
       });
     });
@@ -64,23 +64,22 @@ class UserList extends Component {
     if (!_searchTerm) {
       UserService.getUsers().then((res) => {
         this.setState({
-          data: res.data,
+          users: res.data,
           isLoading: false,
         });
       });
     } else {
       UserService.getUsersByFirstName(_searchTerm).then((res) => {
         this.setState({
-          data: res.data,
+          users: res.data,
           isLoading: false,
         });
       });
     }
   }
 
-
   render() {
-    const listUsers = this.state.data.map((user) => (
+    const listUsers = this.state.users.map((user) => (
       <Media key={user.id}>
         <Nav.Link href={`/user/${user.login}/${user.id}`}>
           {/* <img

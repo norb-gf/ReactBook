@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button } from 'react-bootstrap';
 
 
-class UserForm extends Component {
+class UserFormik extends Component {
 
   render() {
 
@@ -37,7 +37,9 @@ class UserForm extends Component {
           onSubmit={
             (values, { setSubmitting }) => {
                 setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
+                  // this.props.history.push('/add_user/$(values)');
+                  alert('...on Submit...component UserFormik')
+                  console.log('....yy...',values);
                   setSubmitting(false);
                 }, 400);
             }
@@ -63,4 +65,4 @@ class UserForm extends Component {
     )}
 }
 
-export default UserForm;
+export default UserFormik;
