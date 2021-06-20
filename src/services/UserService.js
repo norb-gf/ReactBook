@@ -8,8 +8,24 @@ class UserService {
         return axios.get(USER_API_BASE_URL);
     }
 
+    getUsersSortById(){
+        return axios.get(USER_API_BASE_URL + '/sort_by_id');
+    }
+
     getUsersByFirstName(userFirstName){
         return axios.get(USER_API_BASE_URL + '/name/' + userFirstName);
+    }
+
+    getUsersByFirstNameSorted(userFirstName){
+        return axios.get(USER_API_BASE_URL + '/sort_by_name/' + userFirstName,{
+                headers:{
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Authorization",
+                    "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE",
+                    "Content-Type": "application/json;charset=UTF-8",
+                }
+        }
+        );
     }
 
     addUser(user){

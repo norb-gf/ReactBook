@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Products from "./Products";
-import UserFormik from "./UserFormik";
-import UserCreate from "./UserCreate";
+// import UserCreate from "./UserCreate";
+import UserForm from "./UserForm";
 import UserList from "./UserList";
 import UserListTable from "./UserListTable";
 import RatingMenu from "./RatingMenu";
@@ -20,8 +20,8 @@ class RouterMenu extends Component {
             <Route exact path="/users/table" component={UserListTable} />
             <Route exact path="/users/list" component={UserList} />
             <Route path="/user/:login/:id" component={User} />
-            <Route path="/user_add/" component={UserCreate} />
-            <Route path="/formik" component={UserFormik} />
+            <Route path="/user_add/" component={UserForm} />
+            <Route path="/user_edit/:id" component={UserForm} />
             <Route path="/products" component={Products} />
             <Route path="/rating" component={RatingMenu} />
             <Route path="/*" component={NotFound} />

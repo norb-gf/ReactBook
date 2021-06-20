@@ -18,19 +18,20 @@ class UserListTable extends Component {
       isError: false,
       showDeleteDialog: false,
       selectedUser: {},
+      selectedIdex: 0,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.add = this.add.bind(this);
-    this.delete = this.delete.bind(this);
+    this.addUser = this.addUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
     this.editUser = this.editUser.bind(this);
     this.openDeleteDialog = this.openDeleteDialog.bind(this);
     this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
   }
 
   componentDidMount() {
-    UserService.getUsers().then((res) => {
+    UserService.getUsersSortById().then((res) => {
       this.setState({
         users: res.data,
         isLoading: false,
@@ -41,36 +42,40 @@ class UserListTable extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.getUsersData(this.state.searchTerm);
+    
   }
 
   handleChange(e) {
     this.setState({ searchTerm: e.target.value });
   }
 
-  add(e) {
+  addUser(e) {
     this.props.history.push("/user_add");
   }
 
-  editUser(e) {
-    this.props.history.push("/user_edit");
+  editUser(user) {
+    this.props.history.push(`/user_edit/${user.id}`);
   }
 
-  delete() {
+  deleteUser(e) {
+    setTimeout(() => {
+      UserService.deleteUser(this.state.selectedUser.id)
+        .then((res) => {
+          // console.log('Registro excluido com sucesso....');
+        })
+        .catch((error) => {
+          alert("Could not delete the user...");
+        });
+    }, 400);
+    this.state.users.splice(this.state.selectedIndex, 1);
     this.setState({ showDeleteDialog: false });
-        // console.log("user => " + JSON.stringify(user));
-    UserService.deleteUser(this.state.user.id).then((res) => {
-      this.props.history.push("/users/table");
-    })
-    // catch ( error => {
-    //   alert("Could not delete the user...");
-    //   console.log('Erro....delete ',error);
-    // });
   }
 
-  openDeleteDialog(user) {
+  openDeleteDialog(user, index) {
     this.setState({
       showDeleteDialog: true,
       selectedUser: user,
+      selectedIndex: index,
     });
   }
 
@@ -78,19 +83,21 @@ class UserListTable extends Component {
     this.setState({
       showDeleteDialog: false,
       selectedUser: {},
+      selectedIndex: 0,
     });
   }
 
   getUsersData(_searchTerm) {
     if (!_searchTerm) {
-      UserService.getUsers().then((res) => {
+      UserService.getUsersSortById().then((res) => {
         this.setState({
           users: res.data,
           isLoading: false,
         });
       });
     } else {
-      UserService.getUsersByFirstName(_searchTerm).then((res) => {
+      UserService.getUsersByFirstNameSorted(_searchTerm).then((res) => {
+      // UserService.getUsersByFirstName(_searchTerm).then((res) => {
         this.setState({
           users: res.data,
           isLoading: false,
@@ -100,8 +107,9 @@ class UserListTable extends Component {
   }
 
   render() {
-    const listUsers = this.state.users.map((user) => (
+    const listUsers = this.state.users.map((user, index) => (
       <tr key={user.id}>
+        <td>{user.id}</td>
         <td>{user.firstName}</td>
         <td>{user.lastName}</td>
         <td>{user.emailId}</td>
@@ -109,7 +117,7 @@ class UserListTable extends Component {
         <td>{formataData(user.dataUltAlt)}</td>
         <td>
           <Button
-            onClick={this.editUser.bind(user.id)}
+            onClick={this.editUser.bind(this,user)}
             className="btn btn-warning"
             id="btn-table-list-update"
           >
@@ -118,7 +126,7 @@ class UserListTable extends Component {
         </td>
         <td>
           <Button
-            onClick={this.openDeleteDialog.bind(user)}
+            onClick={this.openDeleteDialog.bind(this, user,index)}
             className="btn btn-danger"
             id="btn-table-list-delete"
           >
@@ -152,12 +160,13 @@ class UserListTable extends Component {
           )}
         </div>
         <div>
-          <Button variant="primary" onClick={this.add}>
+          <Button variant="primary" onClick={this.addUser}>
             Add New User
           </Button>
           <Table striped bordered hover>
             <thead>
               <tr>
+                <th>User id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
@@ -179,11 +188,11 @@ class UserListTable extends Component {
             <Modal.Body>
               <p>
                 Are you sure you want to delete{" "}
-                {this.state.selectedUser.username}?
+                {this.state.selectedUser.firstName}?
               </p>
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.delete}>Delete</Button>
+              <Button onClick={this.deleteUser}>Delete</Button>
               <Button onClick={this.closeDeleteDialog}>Close</Button>
             </Modal.Footer>
           </Modal>
