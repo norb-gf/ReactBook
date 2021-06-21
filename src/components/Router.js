@@ -10,7 +10,7 @@ import Home from './Home'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 
-class RouterMenu extends Component {
+class Router extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -31,7 +31,7 @@ class RouterMenu extends Component {
     );
   }
 }
-export default RouterMenu;
+export default Router;
 
 class NotFound extends Component {
   render() {

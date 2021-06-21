@@ -3,7 +3,7 @@ import { Nav, Navbar } from "react-bootstrap";
 
 import "../css/styles.css";
 
-class Header extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
 
@@ -12,7 +12,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="header">
+      <div className="menu">
           <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/">React-Bootstrapt</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -21,7 +21,6 @@ class Header extends Component {
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/users/table">Users_Table</Nav.Link>
                 <Nav.Link href="/users/list">Users_List</Nav.Link>
-                <Nav.Link href="/user/formik">User_Formik</Nav.Link>
                 <Nav.Link href="/products">Products</Nav.Link>
                 <Nav.Link href="/rating">Rating</Nav.Link>
               </Nav>
@@ -32,4 +31,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default Menu;

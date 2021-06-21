@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import UserService from "../services/UserService";
+import "../css/styles.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 
 class UserForm extends Component {
   title;
@@ -12,7 +15,7 @@ class UserForm extends Component {
     this.title = "New User";
     this.state = {
       user: {},
-      id:"",
+      id: "",
       firstName: "",
       lastName: "",
       emailId: "",
@@ -42,17 +45,22 @@ class UserForm extends Component {
             });
           })
           .catch((error) => {
-            console.log("ERRO. User not exist.....",error);
-            alert("ERRO. getUserById...ComponentDidMount...",error);
+            console.log("ERRO. User not exist.....", error);
+            alert("ERRO. getUserById...ComponentDidMount...", error);
           });
       }, 400);
     }
   }
 
+  handleCancel = (e) => {
+    e.preventDefault();
+    this.props.history.push("/users/table");
+  };
+
   render() {
     return (
-      <div>
-        <h1>{this.title}</h1>
+      <div className="container-userform">
+        <h2>{this.title}</h2>
         <Formik
           enableReinitialize={true}
           initialValues={{
@@ -66,20 +74,43 @@ class UserForm extends Component {
           }}
           validate={(values) => {
             let errors = {};
+            if (!values.firstName) {
+              errors.firstName = "Required";
+            } else if (values.firstName.length < 3) {
+              errors.firstName = "firstName too short";
+            }
+            if (!values.lastName) {
+              errors.lastName = "Required";
+            } else if (values.lastName.length < 3) {
+              errors.lastName = "lastName too short";
+            }
+
+            if (!values.login) {
+              errors.login = "Required";
+            } else if (values.login.length < 6) {
+              errors.login = "login too short. Minimun 6 caracters";
+            }
+
             if (!values.emailId) {
               errors.emailId = "Required";
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.emailId)
             ) {
               errors.emailId = "Invalid emailId address";
-            } else if (values.emailId.length < 10) {
+            } else if (values.emailId.length < 5) {
               errors.emailId = "Email address too short";
             }
 
-            if (!values.firstName) {
-              errors.firstName = "Required";
-            } else if (values.firstName.length < 3) {
-              errors.firstName = "firstName too short";
+            if (!values.senha) {
+              errors.senha = "Required";
+            } else if (values.senha.length < 8) {
+              errors.senha = "senha too short. Minimun 8 caracters";
+            }
+
+            if (!values.repeatSenha) {
+              errors.repeatSenha = "Required";
+            } else if (values.senha !== values.repeatSenha) {
+              errors.repeatSenha = "Senhas are not equal...";
             }
 
             return errors;
@@ -111,34 +142,95 @@ class UserForm extends Component {
         >
           {({ isSubmitting }) => (
             <Form>
-              <Field type="text" name="id" readOnly />
-              <Field type="text" name="firstName" />
-              <span style={{ color: "red", fontWeight: "bold" }}>
-                <ErrorMessage name="firstName" component="div" />
-              </span>
-              <Field type="text" name="lastName" />
-              <span style={{ color: "red", fontWeight: "bold" }}>
-                <ErrorMessage name="lastName" component="div" />
-              </span>
-              <Field type="email" name="emailId" />
-              <span style={{ color: "red", fontWeight: "bold" }}>
-                <ErrorMessage name="emailId" component="div" />
-              </span>
-              <Field type="text" name="login" />
-              <span style={{ color: "red", fontWeight: "bold" }}>
-                <ErrorMessage name="login" component="div" />
-              </span>
-              <Field type="password" name="senha" autoComplete='false'/>
-              <span style={{ color: "red", fontWeight: "bold" }}>
-                <ErrorMessage name="senha" component="div" />
-              </span>
-              <Field type="password" name="repeatSenha" autoComplete='false' />
-              <span style={{ color: "red", fontWeight: "bold" }}>
-                <ErrorMessage name="repeatSenha" component="div" />
-              </span>
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
+            <div className='user-form-container'>
+              <Field type="text" name="id" hidden="true" readOnly />
+              <label className='user-form-label'>
+                {" "}
+                FirstName:
+                <Field className='user-form-input'
+                  type="text"
+                  name="firstName"
+                   />
+              
+                <span>
+                  <ErrorMessage className="user-form-error" name="firstName" component="div" />
+                </span>
+              </label>
+              <label className='user-form-label'>
+                {" "}
+                LastName:
+                <Field className='user-form-input'
+                  type="text"
+                  name="lastName"
+                />
+                <span>
+                  <ErrorMessage className="user-form-error" name="lastName" component="div" />
+                </span>
+              </label>
+              <label className='user-form-label'>
+                {" "}
+                Email:
+                <Field className='user-form-input'
+                  type="email"
+                  name="emailId"
+                />
+                <span>
+                  <ErrorMessage className="user-form-error" name="emailId" component="div" />
+                </span>
+              </label>
+              <label className='user-form-label'>
+                {" "}
+                Login:
+                <Field className='user-form-input'
+                  type="text"
+                  name="login"
+                />
+                <span>
+                  <ErrorMessage className="user-form-error" name="login" component="div" />
+                </span>
+              </label>
+              <label className='user-form-label'>
+                {" "}
+                Senha:
+                <Field className='user-form-input'
+                  type="password"
+                  name="senha"
+                  autoComplete="false"
+                />
+                <span>
+                  <ErrorMessage className="user-form-error" name="senha" component="div" />
+                </span>
+              </label>
+              <label className='user-form-label'>
+                {" "}
+                Repetir a senha:
+                <Field className='user-form-input'
+                  type="password"
+                  name="repeatSenha"
+                  autoComplete="false"
+                />
+                <span>
+                  <ErrorMessage className="user-form-error" name="repeatSenha" component="div" />
+                </span>
+              </label>
+            </div>
+              <div>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-user-form-submit"
+                  disabled={isSubmitting}
+                >
+                  Submit
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-danger btn-user-form-cancel"
+                  onClick={this.handleCancel}
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </button>
+              </div>
             </Form>
           )}
         </Formik>
