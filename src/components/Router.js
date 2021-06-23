@@ -9,6 +9,9 @@ import User from "./User";
 import Home from './Home'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import "../css/stylesReset.css";
+import "../css/stylesGeneral.css";
+
 
 class Router extends Component {
   render() {

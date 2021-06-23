@@ -1,26 +1,4 @@
 
-
-h1, h2 {
-text-align:  center;
-color: blue;    
-
-}
-
-html, body {
-    height: 100%;
-    font-family: "Ubuntu", sans-serif;
-}
-
-.content {
-    flex: 1 0 auto;
-}
-
-.menu {
-  background-color: rgb(61, 116, 138);
-  height: auto;
- 
-}
-  
 .user-form-container{
   display: block;
   background-color: rgba(190, 190, 190, 0.274);
@@ -50,7 +28,6 @@ html, body {
   width:400%;
   padding-left:1rem;
   border-radius: 4px;
-
 }
 .user-form-error:nth-child(1){
   background: rgba(255, 0, 0, 0.842);  
@@ -63,21 +40,4 @@ html, body {
 
 .btn-user-form-cancel{
   margin: 0 auto auto 1rem;
-}
-
-
-.footer {
-  flex-shrink: 0;
-  margin-top: 1rem;
-  background-color: rgb(61, 116, 138);
-  color: white;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  height: auto;
-  font-weight: 400;
-  font-size: 1.0rem;
-  text-align: left;
-  padding: 0 0 0 2rem;
-  z-index:   1;
 }

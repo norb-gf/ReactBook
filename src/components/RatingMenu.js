@@ -3,7 +3,7 @@ import JumboTron from "./JumboTron";
 import Rating from "./Rating";
 import { Button } from "react-bootstrap";
 
-
+import "../css/stylesGeneral.css";
 
 class RatingMenu extends Component {
   render() {

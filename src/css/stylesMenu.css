@@ -1,0 +1,14 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-item {
+  font-weight: 500;
+  border-bottom: rgba(138, 194, 216, 0.01) solid 3px;
+}
+.menu-item:hover {
+  border-radius: 5px;
+  background-color: rgba(138, 194, 216, 0.5);
+  border-bottom: white solid 3px;
+}

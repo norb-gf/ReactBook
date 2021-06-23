@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import '../css/styles.css'
+import React, { Component } from "react";
+import "../css/stylesGeneral.css";
 
 class Footer extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {
-                 
-        }
-    }
+    this.state = {};
+  }
 
-    render() {
-        return (
-            <div className="footer">
-                    <span>Mensagem de rodapé</span>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <footer>
+        <div className="App-footer">
+          <span>Mensagem de rodapé</span>
+        </div>
+      </footer>
+    );
+  }
 }
 
 export default Footer;

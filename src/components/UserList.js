@@ -4,7 +4,7 @@ import { Media, Form, Nav, Button } from "react-bootstrap";
 import UserService from "../services/UserService";
 // import axios from "axios";
 
-import "../css/styles.css";
+import "../css/stylesGeneral.css";
 
 class UserList extends Component {
   constructor(props) {

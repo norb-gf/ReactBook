@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 
+import "../css/stylesGeneral.css";
+
 class Rating extends Component {
   constructor(props) {
     super(props);

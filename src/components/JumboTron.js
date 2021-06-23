@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 
+import '../css/stylesGeneral.css';
+
 class JumboTron extends Component {
 
   render() { 

@@ -1,9 +1,9 @@
 import { Component } from "react";
 import Product from './Product'
 
+import "../css/stylesGeneral.css";
+
 class Products extends Component {
-
-
     constructor(props){
         super(props);
         this.products = this.getProducts();

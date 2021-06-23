@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import UserService from "../services/UserService";
 import { Button } from "react-bootstrap";
-
 import formataData from '../utils/FormataData'
-import "../css/styles.css";
+
+import "../css/stylesGeneral.css";
 
 class User extends Component {
   constructor(props) {

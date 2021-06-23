@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import UserService from "../services/UserService";
-import "../css/styles.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
+import "../css/stylesGeneral.css";
+import "../css/stylesUserForm.css";
 
 class UserForm extends Component {
   title;

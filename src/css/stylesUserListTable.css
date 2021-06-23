@@ -1,0 +1,39 @@
+#table-tr{
+  text-align: center;
+}
+
+.table-search{
+  display: inline-block;
+  height: auto;
+  margin-left: 1rem;
+  padding: 1rem;
+}
+
+.table-items{
+  height: auto;
+  margin: 0 5rem 0 10rem;
+}
+
+.table-search-input{
+  display: inline-block;
+  width:35rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+}
+
+.table-search-button{
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+  height: auto;
+  margin-left: 1rem;
+}
+
+.userListTable-button-add{
+  padding-left:2rem;
+  margin-bottom: 1rem;
+}
+
+#td-button{
+  text-align: center;
+}

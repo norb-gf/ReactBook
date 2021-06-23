@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-import "../css/styles.css";
+import "../css/stylesGeneral.css";
+import "../css/stylesMenu.css";
 
 class Menu extends Component {
   constructor(props) {
@@ -12,20 +13,41 @@ class Menu extends Component {
 
   render() {
     return (
-      <div className="menu">
-          <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/">React-Bootstrapt</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/users/table">Users_Table</Nav.Link>
-                <Nav.Link href="/users/list">Users_List</Nav.Link>
-                <Nav.Link href="/products">Products</Nav.Link>
-                <Nav.Link href="/rating">Rating</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+      <div className="menu d-flex">
+        <Navbar expand="sm">
+          <Navbar.Brand className="ml-auto" href="/">
+            React-Bootstrapt
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link className="menu-item" href="/">
+                Home
+              </Nav.Link>
+              <Nav.Link className=" menu-item" href="/users/table">
+                Users_Table
+              </Nav.Link>
+              <NavDropdown title="Users" id="usersDropDown">
+                <NavDropdown.Item className="menu-item" href="/users/list">
+                  Users_List
+                </NavDropdown.Item>
+                <NavDropdown.Item className="menu-item" href="/users/list">
+                  Users_List
+                </NavDropdown.Item>
+                <NavDropdown.Divider></NavDropdown.Divider>
+                <NavDropdown.Item className="menu-item" href="/users/list">
+                  Users_List
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link className="menu-item" href="/products">
+                Products
+              </Nav.Link>
+              <Nav.Link className="menu-item" href="/rating">
+                Rating
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
     );
   }

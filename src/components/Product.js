@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import Rating from './Rating'
 import { Media } from 'react-bootstrap'
 
+import "../css/stylesGeneral.css";
+
 class Product extends Component {
-
-
-
-
 
   render() {
     return (
