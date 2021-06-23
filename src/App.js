@@ -4,7 +4,6 @@ import Menu from "./components/Menu";
 import Footer from "./components/Footer";
 import "./css/stylesReset.css";
 import "./css/stylesGeneral.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
   render() {

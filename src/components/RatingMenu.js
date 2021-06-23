@@ -1,7 +1,6 @@
 import {Component} from 'react'
 import JumboTron from "./JumboTron";
 import Rating from "./Rating";
-import { Button } from "react-bootstrap";
 
 import "../css/stylesGeneral.css";
 
@@ -20,9 +19,9 @@ class RatingMenu extends Component {
         <Rating rating="3" />
         <Rating rating="2" />
         <Rating rating="4" />
-        <Button variant="primary" disabled={!IsValid}>
+        <button className='btn' variant="primary" disabled={!IsValid}>
           Default
-        </Button>
+        </button>
       </div>
     );
   }

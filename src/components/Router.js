@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import Products from "./Products";
-// import UserCreate from "./UserCreate";
 import UserForm from "./UserForm";
+import UserFormDel from "./UserFormDel";
 import UserList from "./UserList";
 import UserListTable from "./UserListTable";
 import RatingMenu from "./RatingMenu";
@@ -25,6 +25,7 @@ class Router extends Component {
             <Route path="/user/:login/:id" component={User} />
             <Route path="/user_add/" component={UserForm} />
             <Route path="/user_edit/:id" component={UserForm} />
+            <Route path="/user_del/:id" component={UserFormDel} />
             <Route path="/products" component={Products} />
             <Route path="/rating" component={RatingMenu} />
             <Route path="/*" component={NotFound} />

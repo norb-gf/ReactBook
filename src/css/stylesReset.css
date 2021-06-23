@@ -1,12 +1,18 @@
 * {
 margin: 0;
 padding: 0;
+border: 0;
 box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: "Opens Sans", sans-serif;
 }
+
+ul, ol, li {
+  list-style: none;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

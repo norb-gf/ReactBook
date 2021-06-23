@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import UserService from "../services/UserService";
-import { Button } from "react-bootstrap";
 import formataData from '../utils/FormataData'
 
 import "../css/stylesGeneral.css";
@@ -43,9 +42,9 @@ class User extends Component {
         <p>Last Name: {this.state.user.lastName}</p>
         <p>Email: {this.state.user.emailId}</p>
         <p>Data Ult Alt: {formataData(this.state.user.dataUltAlt)}</p>
-        <Button variant="primary" onClick={this.handleClick}>
+        <button className='btn' onClick={this.handleClick}>
           Go to Users List
-        </Button>
+        </button>
       </div>
     );
   }

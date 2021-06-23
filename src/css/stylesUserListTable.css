@@ -1,39 +1,68 @@
-#table-tr{
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(179, 174, 174, 0.158);
+}
+
+th{
+  border: 0.1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0.5rem;
+  text-align: center;
+}
+td{
+  border: 0.1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.5rem;
+  text-align: left;
+  line-height: 1.5rem;
+  font-size:  0.9rem;
+}
+
+.td-center{
   text-align: center;
 }
 
-.table-search{
-  display: inline-block;
-  height: auto;
-  margin-left: 1rem;
+.tb-main tr:nth-child(even){
+    background-color: #eee;
+}
+.tb-main tr:nth-child(odd){
+    background-color: #fff;
+}
+.input-search{
+  width: 20rem;
+  height: 2rem;
+  border: 0.12rem solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.2rem;
   padding: 1rem;
-}
-
-.table-items{
-  height: auto;
-  margin: 0 5rem 0 10rem;
-}
-
-.table-search-input{
-  display: inline-block;
-  width:35rem;
-  height: 2.5rem;
   margin-left: 1rem;
+  font-size: 1rem;
 }
 
-.table-search-button{
-  display: inline-block;
-  text-align: center;
-  align-items: center;
-  height: auto;
-  margin-left: 1rem;
+.btn-search{
+  background-color: rgb(0, 180, 0,0.9);
+  border:  0.3rem solid rgba(0, 37, 247, 0.0);
+  margin: 0 0 0.5rem 1.5rem;
+}
+.btn-search:hover{
+  background-color: rgb(27, 99, 27);
 }
 
-.userListTable-button-add{
-  padding-left:2rem;
-  margin-bottom: 1rem;
+.btn-add{
+  background-color: rgba(0, 37, 247, 0.8);
+  border:  0.3rem solid rgba(0, 37, 247, 0.0);
+  margin: 0 0 0.5rem 1.5rem;
 }
 
-#td-button{
-  text-align: center;
+.btn-edit{
+  background: rgb(241, 225, 3);
+}
+.btn-edit:hover{
+  background: rgba(255, 255, 0, 0.2);
+}
+
+.btn-del{
+  background: red;
+}
+.btn-del:hover{
+  background: rgba(255, 0, 0, 0.2);
 }

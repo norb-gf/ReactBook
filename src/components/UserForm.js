@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import UserService from "../services/UserService";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/stylesGeneral.css";
 import "../css/stylesUserForm.css";
 
@@ -218,14 +217,14 @@ class UserForm extends Component {
               <div>
                 <button
                   type="submit"
-                  className="btn btn-primary btn-user-form-submit"
+                  className="btn btn-user-form-submit"
                   disabled={isSubmitting}
                 >
                   Submit
                 </button>
                 <button
                   type="submit"
-                  className="btn btn-danger btn-user-form-cancel"
+                  className="btn btn-user-form-cancel"
                   onClick={this.handleCancel}
                   disabled={isSubmitting}
                 >

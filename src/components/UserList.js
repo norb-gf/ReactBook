@@ -1,6 +1,6 @@
 import { Component } from "react";
 import ReactLoading from "react-loading";
-import { Media, Form, Nav, Button } from "react-bootstrap";
+// import { Media, Form, Nav, Button } from "react-bootstrap";
 import UserService from "../services/UserService";
 // import axios from "axios";
 
@@ -80,26 +80,26 @@ class UserList extends Component {
 
   render() {
     const listUsers = this.state.users.map((user) => (
-      <Media key={user.id}>
-        <Nav.Link href={`/user/${user.login}/${user.id}`}>
-          {/* <img
-            width={64}
-            height={64}
-            className="mr-3"
-            src={user.avatar_url}
-            alt="Generic placeholder"
-          /> */}
+      // <Media key={user.id}>
+      //   <Nav.Link href={`/user/${user.login}/${user.id}`}>
+      //     {/* <img
+      //       width={64}
+      //       height={64}
+      //       className="mr-3"
+      //       src={user.avatar_url}
+      //       alt="Generic placeholder"
+      //     /> */}
           <p>Id: {user.id}</p>
-        </Nav.Link>
-        <Media.Body>
-          <p>Login:{user.login}</p>
-          <p>FirstName:{user.firstName}</p>
-        </Media.Body>
-      </Media>
+      //   </Nav.Link>
+      //   <Media.Body>
+          // <p>Login:{user.login}</p>
+          // <p>FirstName:{user.firstName}</p>
+      //   </Media.Body>
+      // </Media>
     ));
     return (
       <div>
-        <Form inline onSubmit={this.handleSubmit}>
+        {/* <Form inline onSubmit={this.handleSubmit}>
           <Form.Group controlId="formInlineName">
             <Form.Control
               type="text"
@@ -107,9 +107,9 @@ class UserList extends Component {
               placeholder="Enter Search Term"
               onChange={this.handleChange}
             />
-            <Button type="submit">Search</Button>
+            <button className='btn' type="submit">Search</button>
           </Form.Group>
-        </Form>
+        </Form> */}
         <span>
           {this.state.isError ? <h5>{this.state.errorText}</h5> : <p></p>}
         </span>
