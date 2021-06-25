@@ -4,6 +4,8 @@ import App from './App';
 
 import './css/stylesReset.css';
 import './css/stylesGeneral.css';
+import "./css/stylesBtn.css";
+
 
 ReactDOM.render(
   <React.StrictMode>

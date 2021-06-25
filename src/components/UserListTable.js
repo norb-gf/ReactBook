@@ -1,5 +1,4 @@
 import { Component } from "react";
-// import { Form, Table, Button, Modal } from "react-bootstrap";
 import UserService from "../services/UserService";
 import ReactLoading from "react-loading";
 import formataData from "../utils/FormataData";

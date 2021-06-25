@@ -1,16 +1,8 @@
 import {Component} from 'react'
-import Products from "./Products";
 import UserForm from "./UserForm";
-import UserList from "./UserList";
 import UserListTable from "./UserListTable";
-import RatingMenu from "./RatingMenu";
-import User from "./User";
 import Home from './Home'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-import "../css/stylesReset.css";
-import "../css/stylesGeneral.css";
-
 
 class Router extends Component {
   render() {
@@ -20,13 +12,9 @@ class Router extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/users/table" component={UserListTable} />
-            <Route exact path="/users/list" component={UserList} />
-            <Route path="/user/:login/:id" component={User} />
             <Route path="/user_add/:oper" component={UserForm} />
             <Route path="/user_edit/:oper/:id" component={UserForm} />
             <Route path="/user_del/:oper/:id" component={UserForm} />
-            <Route path="/products" component={Products} />
-            <Route path="/rating" component={RatingMenu} />
             <Route path="/*" component={NotFound} />
           </Switch>
         </div>

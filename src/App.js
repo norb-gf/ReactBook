@@ -2,9 +2,6 @@ import { Component } from "react";
 import Router from "./components/Router";
 import Menu from "./components/Menu";
 import Footer from "./components/Footer";
-import "./css/stylesReset.css";
-import "./css/stylesGeneral.css";
-import "./css/stylesBtn.css";
 
 class App extends Component {
   render() {

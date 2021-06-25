@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import UserService from "../services/UserService";
 import userFormConsist from "../utils/UserFormConsist";
 
-import "../css/stylesGeneral.css";
 import "../css/stylesUserForm.css";
 
 class UserForm extends Component {
