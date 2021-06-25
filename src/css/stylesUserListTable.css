@@ -1,5 +1,7 @@
 
 table {
+  position:absolute;
+  top:6.5rem;
   width: 100%;
   border-collapse: collapse;
   background-color: rgba(179, 174, 174, 0.158);
@@ -9,13 +11,14 @@ th{
   border: 0.1px solid rgba(0, 0, 0, 0.1);
   padding: 0.5rem 0.5rem;
   text-align: center;
+  background-color: rgba(128, 128, 128, 0.233);
 }
 td{
   border: 0.1px solid rgba(0, 0, 0, 0.1);
-  padding: 0.2rem 0.5rem;
+  padding: 0 0.5rem;
   text-align: left;
-  line-height: 1.5rem;
   font-size:  0.9rem;
+  height: 1.8rem;
 }
 
 .td-center{
@@ -29,6 +32,9 @@ td{
     background-color: #fff;
 }
 .input-search{
+  position:absolute;
+  left: 3rem;
+  top: 3.5rem;
   width: 20rem;
   height: 2rem;
   border: 0.12rem solid rgba(0, 0, 0, 0.4);
@@ -36,4 +42,16 @@ td{
   padding: 1rem;
   margin-left: 1rem;
   font-size: 1rem;
+}
+.btn-search{
+  position: absolute;
+  left: 24.5rem;
+  top: 3.23rem;
+}
+
+.place-right{
+  position: absolute;
+  top: 3.23rem;
+  right: 4.5rem;
+  margin-left: 20rem;
 }

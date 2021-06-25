@@ -2,7 +2,7 @@
   width: 66.66%;
   /* Para centralizar o conteudo do display block */
   margin: 0 auto;
-  background-color: rgba(128, 128, 128, 0.247);
+  background-color: rgba(128, 128, 128, 0.103);
 }
 
 .item{
@@ -34,7 +34,6 @@ label {
 }
 
 input {
-  border: 1px solid rgba(128, 128, 128, 0.308);
   border-radius: 4px;
   width: 35rem;
   height: 1.8rem;
@@ -44,9 +43,9 @@ input {
 }
 
 input:focus {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   border-radius: 4px;
-  background-color: yellow;
+  box-shadow: 0 0 1rem gray;
 }
 
 h1{

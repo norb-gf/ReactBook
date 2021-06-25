@@ -157,7 +157,7 @@ class UserForm extends Component {
             <div>
               <label>{'.'}</label>
             </div>
-            <input type="text" name="id" hidden="true" readOnly />
+            <input type="text" name="id" hidden="true"  />
             <div className="main">
               <div className="item">
                 <label>FirstName:</label>
@@ -173,7 +173,6 @@ class UserForm extends Component {
                   className="lbl-erro"
                   value={this.state.errFirstName}
                   disabled
-                  readOnly
                 />
               </div>
               <div className="item">
@@ -189,7 +188,6 @@ class UserForm extends Component {
                 <input
                   className="lbl-erro"
                   value={this.state.errLastName}
-                  readOnly
                   disabled
                 />
               </div>
@@ -206,7 +204,6 @@ class UserForm extends Component {
                 <input
                   className="lbl-erro"
                   value={this.state.errEmailId}
-                  readOnly
                   disabled
                 />
               </div>
@@ -223,7 +220,7 @@ class UserForm extends Component {
                 <input
                   className="lbl-erro"
                   value={this.state.errLogin}
-                  readOnly
+                  
                   disabled
                 />
               </div>
@@ -242,7 +239,7 @@ class UserForm extends Component {
                   className="lbl-erro"
                   value={this.state.errSenha}
                   disabled
-                  readOnly
+                  
                 />
               </div>
               <div className="item">
@@ -260,7 +257,7 @@ class UserForm extends Component {
                   className="lbl-erro"
                   value={this.state.errRepeatSenha}
                   disabled
-                  readOnly
+                  
                 />
               </div>
             </div>

@@ -88,7 +88,7 @@ class UserListTable extends Component {
         <td className="td-center">{formataData(user.dataUltAlt)}</td>
         <td className="td-center">
           <button
-            className="btn btn-edit"
+            className="btn btn-small"
             onClick={this.editUser.bind(this, user)}
           >
             Upd
@@ -97,7 +97,7 @@ class UserListTable extends Component {
         <td className="td-center">
           <button
             onClick={this.delUser.bind(this, user, index)}
-            className="btn btn-del"
+            className="btn btn-small"
           >
             Del
           </button>
@@ -128,8 +128,8 @@ class UserListTable extends Component {
         {this.state.isLoading && (
           <ReactLoading type="spinnigBubbles" color="#444" />
         )}
-        <button className="btn btn-add" variant="info" onClick={this.addUser}>
-          Add New User
+        <button className="btn place-right"  onClick={this.addUser}>
+          Add New
         </button>
         <table className="tb-main">
           <thead>

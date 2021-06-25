@@ -2,6 +2,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
   /* box-shadow: 0 0 25px 0 black; */
 }
 
