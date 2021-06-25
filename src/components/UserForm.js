@@ -8,13 +8,14 @@ import "../css/stylesUserForm.css";
 class UserForm extends Component {
   title;
   id;
+  oper;
   werr;
 
   constructor(props) {
     super(props);
 
     this.id = this.props.match.params.id;
-    this.title = "New User";
+    this.oper = this.props.match.params.oper;
     this.werr = {};
 
     this.state = {
@@ -31,17 +32,24 @@ class UserForm extends Component {
       errLoginName: "",
       errSenhaName: "",
       errRepeatSenhaName: "",
+      isReadOnly: false,
     };
 
-    if (this.id) {
+    this.title = "New User";
+    if (this.oper === "Upd") {
       this.title = "Edit User";
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+    } else if (this.oper === "Del") {
+      this.title = "Delete User";
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    if (this.id) {
+    console.log("1......", this.oper);
+    if (this.oper !== "Add") {
+      console.log("leitura.....");
       setTimeout(() => {
         UserService.getUserById(this.id)
           .then((res) => {
@@ -61,6 +69,10 @@ class UserForm extends Component {
             alert("ERRO. getUserById...ComponentDidMount...", error);
           });
       }, 400);
+    }
+
+    if (this.oper === "Del") {
+      this.setState({ isReadOnly: true });
     }
   }
 
@@ -90,6 +102,9 @@ class UserForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    let submitOk = true;
+
     const values = {
       firstName: document.forms["form-main"]["firstName"].value,
       lastName: document.forms["form-main"]["lastName"].value,
@@ -99,48 +114,57 @@ class UserForm extends Component {
       repeatSenha: document.forms["form-main"]["repeatSenha"].value,
     };
 
-    const werro = userFormConsist(values);
+    if (this.oper !== "Del") {
+      const werro = userFormConsist(values);
 
-    let submitOk = true;
-
-    if (werro.firstName !== "") {
-      this.setState({ errFirstName: werro.firstName });
-      submitOk = false;
-    }
-    if (werro.lastName !== "") {
-      this.setState({ errLastName: werro.lastName });
-      submitOk = false;
-    }
-    if (werro.emailId !== "") {
-      this.setState({ errEmailId: werro.emailId });
-      submitOk = false;
-    }
-    if (werro.login !== "") {
-      this.setState({ errLogin: werro.login });
-      submitOk = false;
-    }
-    if (werro.senha !== "") {
-      this.setState({ errSenha: werro.senha });
-      submitOk = false;
-    }
-    if (werro.repeatSenha !== "") {
-      this.setState({ errRepeatSenha: werro.repeatSenha });
-      submitOk = false;
+      if (werro.firstName !== "") {
+        this.setState({ errFirstName: werro.firstName });
+        submitOk = false;
+      }
+      if (werro.lastName !== "") {
+        this.setState({ errLastName: werro.lastName });
+        submitOk = false;
+      }
+      if (werro.emailId !== "") {
+        this.setState({ errEmailId: werro.emailId });
+        submitOk = false;
+      }
+      if (werro.login !== "") {
+        this.setState({ errLogin: werro.login });
+        submitOk = false;
+      }
+      if (werro.senha !== "") {
+        this.setState({ errSenha: werro.senha });
+        submitOk = false;
+      }
+      if (werro.repeatSenha !== "") {
+        this.setState({ errRepeatSenha: werro.repeatSenha });
+        submitOk = false;
+      }
     }
 
     if (submitOk) {
-      setTimeout(() => {
-        if (this.id) {
-          UserService.updateUser(values, this.id).then((res) => {
-            this.props.history.push("/users/table");
-          });
-        } else {
-          UserService.addUser(values).then((res) => {
-            this.props.history.push("/users/table");
-          });
-        }
-      }, 400);
+      this.submitAPI(values);
     }
+  };
+
+  submitAPI = (values) => {
+    console.log("....submit", this.oper);
+    setTimeout(() => {
+      if (this.oper === "Upd") {
+        UserService.updateUser(values, this.id).then((res) => {
+          this.props.history.push("/users/table");
+        });
+      } else if (this.oper === "Add") {
+        UserService.addUser(values).then((res) => {
+          this.props.history.push("/users/table");
+        });
+      } else {
+        UserService.deleteUser(this.id).then((res) => {
+          this.props.history.push("/users/table");
+        });
+      }
+    }, 400);
   };
 
   handleCancel = (e) => {
@@ -153,19 +177,21 @@ class UserForm extends Component {
       <div>
         <h1>{this.title}</h1>
         <div className="container">
-          <form name="form-main" autoComplete="off">
+          <form name="form-main">
             <div>
-              <label>{'.'}</label>
+              <label>{"."}</label>
             </div>
-            <input type="text" name="id" hidden="true"  />
             <div className="main">
               <div className="item">
                 <label>FirstName:</label>
                 <input
+                  className="input-item"
+                  id="firstName"
                   type="text"
                   name="firstName"
                   value={this.state.firstName}
                   onChange={this.handleChange}
+                  readOnly={this.state.isReadOnly}
                 />
               </div>
               <div>
@@ -178,10 +204,12 @@ class UserForm extends Component {
               <div className="item">
                 <label>LastName:</label>
                 <input
+                  className="input-item"
                   type="text"
                   name="lastName"
                   value={this.state.lastName}
                   onChange={this.handleChange}
+                  readOnly={this.state.isReadOnly}
                 />
               </div>
               <div>
@@ -194,10 +222,12 @@ class UserForm extends Component {
               <div className="item">
                 <label>Email:</label>
                 <input
+                  className="input-item"
                   type="email"
                   name="emailId"
                   value={this.state.emailId}
                   onChange={this.handleChange}
+                  readOnly={this.state.isReadOnly}
                 />
               </div>
               <div>
@@ -210,28 +240,31 @@ class UserForm extends Component {
               <div className="item">
                 <label>Login:</label>
                 <input
+                  className="input-item"
                   type="text"
                   name="login"
                   value={this.state.login}
                   onChange={this.handleChange}
+                  readOnly={this.state.isReadOnly}
                 />
               </div>
               <div>
                 <input
                   className="lbl-erro"
                   value={this.state.errLogin}
-                  
                   disabled
                 />
               </div>
               <div className="item">
                 <label>Senha:</label>
                 <input
+                  className="input-item"
                   type="password"
                   name="senha"
                   autoComplete="false"
                   value={this.state.senha}
                   onChange={this.handleChange}
+                  readOnly={this.state.isReadOnly}
                 />
               </div>
               <div>
@@ -239,17 +272,18 @@ class UserForm extends Component {
                   className="lbl-erro"
                   value={this.state.errSenha}
                   disabled
-                  
                 />
               </div>
               <div className="item">
                 <label>Repetir a senha:</label>
                 <input
+                  className="input-item"
                   type="password"
                   name="repeatSenha"
                   autoComplete="false"
                   value={this.state.repeatSenha}
                   onChange={this.handleChange}
+                  readOnly={this.state.isReadOnly}
                 />
               </div>
               <div>
@@ -257,7 +291,6 @@ class UserForm extends Component {
                   className="lbl-erro"
                   value={this.state.errRepeatSenha}
                   disabled
-                  
                 />
               </div>
             </div>

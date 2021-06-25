@@ -38,6 +38,7 @@ class UserListTable extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.setState({isLoading:true});
     this.getUsersData(this.state.searchTerm);
   }
 
@@ -46,20 +47,21 @@ class UserListTable extends Component {
   }
 
   addUser(e) {
-    this.props.history.push("/user_add");
+    this.props.history.push(`/user_add/${'Add'}`);
   }
 
   editUser(user) {
-    this.props.history.push(`/user_edit/${user.id}`);
+    this.props.history.push(`/user_edit/${'Upd'}/${user.id}`);
   }
 
   delUser(user) {
-    this.props.history.push(`/user_del/${user.id}`);
+    this.props.history.push(`/user_del/${'Del'}/${user.id}`);
   }
 
 
 
   getUsersData(_searchTerm) {
+    this.setState({isLoading:true});
     if (!_searchTerm) {
       UserService.getUsersSortById().then((res) => {
         this.setState({
