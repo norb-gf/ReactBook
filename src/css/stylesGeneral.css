@@ -5,22 +5,11 @@ color: blue;
 }
 
 html, body {
-    padding: 2.5rem 0 1rem  0;
+    padding: 2.0rem 0 1rem  0;
     width: 100%;
     font-family: "Ubuntu", sans-serif;
 }
 
-/* .content {
-    flex: 1 0 auto;
-} */
-.App-menu{
-  top:0;
-  box-sizing: border-box;
-  position: fixed;
-  background-color: rgb(222, 243, 252);
-  width: 100%;
-  border-bottom: 1px solid rgb(61,116,138,0.9);
-}
 .App-footer {
   box-sizing: border-box;  
   position:fixed;
@@ -37,13 +26,4 @@ html, body {
   /* padding-left: 5rem; */
   text-indent: 5rem;
 }
-.btn{
-  text-rendering: auto;
-  text-align: center;
-  cursor:  pointer;
-  box-sizing: border-box;
-  font: 300 Arial;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 3px;
-}
+

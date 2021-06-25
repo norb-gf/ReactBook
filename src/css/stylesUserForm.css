@@ -1,43 +1,59 @@
+.container{
+  width: 66.66%;
+  /* Para centralizar o conteudo do display block */
+  margin: 0 auto;
+  background-color: rgba(128, 128, 128, 0.247);
+}
 
-.user-form-container{
-  display: block;
-  background-color: rgba(190, 190, 190, 0.274);
+.item{
+  margin: 0.2;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:  center;
+  line-height: 2rem;
+}
+
+.div-btn{
   width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0.9rem;
-  padding: 0.5rem;
-}  
-
-.user-form-label{
-    display:block;
-    width: 20%;
-    margin: 1rem 2rem;
-
-} 
-.user-form-input{
-    display:block;
-    width: 400%;
-    margin-left: 3rem;
-    margin-right: auto;
+  margin: 0.5rem auto 0 auto;
 }
-.user-form-error{
-  color: white;  
+
+label {
+  width: 10rem;
   font-weight: 700;
-  margin-left: 3rem;
-  width:400%;
-  padding-left:1rem;
+}
+
+.lbl-erro{
+  border:none;
+  width: 40rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 16rem;
+  color:red;
+}
+
+input {
+  border: 1px solid rgba(128, 128, 128, 0.308);
   border-radius: 4px;
-}
-.user-form-error:nth-child(1){
-  background: rgba(255, 0, 0, 0.842);  
+  width: 35rem;
+  height: 1.8rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+
 }
 
-
-.btn-user-form-submit{
-  margin:  0 1rem auto 25rem;
+input:focus {
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: yellow;
 }
 
-.btn-user-form-cancel{
-  margin: 0 auto auto 1rem;
+h1{
+  margin: 0 0  0.3rem 0;
 }
+
+/* input[focus] {
+  border: 2px solid re  d;
+  border-radius: 4px;
+} */

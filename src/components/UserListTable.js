@@ -4,7 +4,6 @@ import UserService from "../services/UserService";
 import ReactLoading from "react-loading";
 import formataData from "../utils/FormataData";
 
-import "../css/stylesGeneral.css";
 import "../css/stylesUserListTable.css";
 
 class UserListTable extends Component {
@@ -116,6 +115,7 @@ class UserListTable extends Component {
             value={this.state.searchTerm}
             placeholder="Enter Search Term"
             onChange={this.handleChange}
+            autoFocus
           />
           <button
             className="btn btn-search"
@@ -124,9 +124,6 @@ class UserListTable extends Component {
           >
             Search
           </button>
-          <span>
-            {this.state.isError ? <h5>{this.state.errorText}</h5> : <p></p>}
-          </span>
         </form>
         {this.state.isLoading && (
           <ReactLoading type="spinnigBubbles" color="#444" />

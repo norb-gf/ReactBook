@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import UserService from "../services/UserService";
 
-import "../css/stylesGeneral.css";
 
 class UserFormDel extends Component {
   id;
@@ -20,6 +19,7 @@ class UserFormDel extends Component {
     };
     this.handleDelete = this.handleDelete.bind(this);
   }
+  
   componentDidMount() {
     setTimeout(() => {
       UserService.getUserById(this.id)
@@ -105,16 +105,16 @@ class UserFormDel extends Component {
             />
           </label>
         </div>
-        <div>
+        <div className='btns'>
           <button
-            className="btn btn-user-form-submit"
+            className="btn btn-submit"
             onClick={this.handleDelete}
           >
             Confirm
           </button>
           <button
             // type="submit"
-            className="btn btn-user-form-cancel"
+            className="btn btn-cancel"
             onClick={this.handleCancel}
           >
             Cancel

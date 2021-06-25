@@ -1,14 +1,38 @@
-.menu {
-  display: flex;
-  flex-direction: row;
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /* box-shadow: 0 0 25px 0 black; */
 }
 
-.menu-item {
+ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 500;
+  font-size:  1.3rem;
+  background-color: rgb(240, 240, 240);
+  height: 2.5rem;
+  border-bottom: rgba(138, 194, 216, 0.01) solid 3px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+a {
+  display: inline;
   font-weight: 500;
   border-bottom: rgba(138, 194, 216, 0.01) solid 3px;
+  text-decoration: none;
+  padding:0.5rem  3rem;
 }
-.menu-item:hover {
+
+a:hover{
+  background-color: white;
   border-radius: 5px;
-  background-color: rgba(138, 194, 216, 0.5);
-  border-bottom: white solid 3px;
+  border-bottom:red solid 2px;
+}
+
+#home{
+  display:flex; 
+  margin-right: 25rem;
 }

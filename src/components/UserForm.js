@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import UserService from "../services/UserService";
+import userFormConsist from "../utils/UserFormConsist";
 
 import "../css/stylesGeneral.css";
 import "../css/stylesUserForm.css";
@@ -8,11 +8,15 @@ import "../css/stylesUserForm.css";
 class UserForm extends Component {
   title;
   id;
+  werr;
 
   constructor(props) {
     super(props);
+
     this.id = this.props.match.params.id;
     this.title = "New User";
+    this.werr = {};
+
     this.state = {
       user: {},
       id: "",
@@ -21,10 +25,18 @@ class UserForm extends Component {
       emailId: "",
       login: "",
       senha: "",
+      errFirstName: "",
+      errLastName: "",
+      errEmailIdName: "",
+      errLoginName: "",
+      errSenhaName: "",
+      errRepeatSenhaName: "",
     };
 
     if (this.id) {
       this.title = "Edit User";
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
   }
 
@@ -52,6 +64,85 @@ class UserForm extends Component {
     }
   }
 
+  handleChange = (e) => {
+    if (e.target.name === "firstName") {
+      this.setState({
+        firstName: e.target.value,
+        errFirstName: "",
+      });
+    }
+    if (e.target.name === "lastName") {
+      this.setState({ lastName: e.target.value, errLastName: "" });
+    }
+    if (e.target.name === "emailId") {
+      this.setState({ emailId: e.target.value, errEmailId: "" });
+    }
+    if (e.target.name === "login") {
+      this.setState({ login: e.target.value, errLogin: "" });
+    }
+    if (e.target.name === "senha") {
+      this.setState({ senha: e.target.value, errSenha: "" });
+    }
+    if (e.target.name === "repeatSenha") {
+      this.setState({ repeatSenha: e.target.value, errRepeatSenha: "" });
+    }
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const values = {
+      firstName: document.forms["form-main"]["firstName"].value,
+      lastName: document.forms["form-main"]["lastName"].value,
+      emailId: document.forms["form-main"]["emailId"].value,
+      login: document.forms["form-main"]["login"].value,
+      senha: document.forms["form-main"]["senha"].value,
+      repeatSenha: document.forms["form-main"]["repeatSenha"].value,
+    };
+
+    const werro = userFormConsist(values);
+
+    let submitOk = true;
+
+    if (werro.firstName !== "") {
+      this.setState({ errFirstName: werro.firstName });
+      submitOk = false;
+    }
+    if (werro.lastName !== "") {
+      this.setState({ errLastName: werro.lastName });
+      submitOk = false;
+    }
+    if (werro.emailId !== "") {
+      this.setState({ errEmailId: werro.emailId });
+      submitOk = false;
+    }
+    if (werro.login !== "") {
+      this.setState({ errLogin: werro.login });
+      submitOk = false;
+    }
+    if (werro.senha !== "") {
+      this.setState({ errSenha: werro.senha });
+      submitOk = false;
+    }
+    if (werro.repeatSenha !== "") {
+      this.setState({ errRepeatSenha: werro.repeatSenha });
+      submitOk = false;
+    }
+
+    if (submitOk) {
+      setTimeout(() => {
+        if (this.id) {
+          UserService.updateUser(values, this.id).then((res) => {
+            this.props.history.push("/users/table");
+          });
+        } else {
+          UserService.addUser(values).then((res) => {
+            this.props.history.push("/users/table");
+          });
+        }
+      }, 400);
+    }
+  };
+
   handleCancel = (e) => {
     e.preventDefault();
     this.props.history.push("/users/table");
@@ -59,181 +150,138 @@ class UserForm extends Component {
 
   render() {
     return (
-      <div className="container-userform">
-        <h2>{this.title}</h2>
-        <Formik
-          enableReinitialize={true}
-          initialValues={{
-            id: this.state.id,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            emailId: this.state.emailId,
-            login: this.state.login,
-            senha: this.state.senha,
-            repeatSenha: this.state.repeatSenha,
-          }}
-          validate={(values) => {
-            let errors = {};
-            if (!values.firstName) {
-              errors.firstName = "Required";
-            } else if (values.firstName.length < 3) {
-              errors.firstName = "firstName too short";
-            }
-            if (!values.lastName) {
-              errors.lastName = "Required";
-            } else if (values.lastName.length < 3) {
-              errors.lastName = "lastName too short";
-            }
-
-            if (!values.login) {
-              errors.login = "Required";
-            } else if (values.login.length < 6) {
-              errors.login = "login too short. Minimun 6 caracters";
-            }
-
-            if (!values.emailId) {
-              errors.emailId = "Required";
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.emailId)
-            ) {
-              errors.emailId = "Invalid emailId address";
-            } else if (values.emailId.length < 5) {
-              errors.emailId = "Email address too short";
-            }
-
-            if (!values.senha) {
-              errors.senha = "Required";
-            } else if (values.senha.length < 8) {
-              errors.senha = "senha too short. Minimun 8 caracters";
-            }
-
-            if (!values.repeatSenha) {
-              errors.repeatSenha = "Required";
-            } else if (values.senha !== values.repeatSenha) {
-              errors.repeatSenha = "Senhas are not equal...";
-            }
-
-            return errors;
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            let userData = {
-              id: values.id,
-              firstName: values.firstName,
-              lastName: values.lastName,
-              emailId: values.emailId,
-              login: values.login,
-              senha: values.senha,
-              repeatSenha: values.repeatSenha,
-            };
-            setTimeout(() => {
-              if (this.id) {
-                UserService.updateUser(userData, this.id).then((res) => {
-                  this.props.history.push("/users/table");
-                });
-              } else {
-                UserService.addUser(userData).then((res) => {
-                  this.props.history.push("/users/table");
-                });
-              }
-
-              setSubmitting(false);
-            }, 400);
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-            <div className='user-form-container'>
-              <Field type="text" name="id" hidden="true" readOnly />
-              <label className='user-form-label'>
-                {" "}
-                FirstName:
-                <Field className='user-form-input'
+      <div>
+        <h1>{this.title}</h1>
+        <div className="container">
+          <form name="form-main" autoComplete="off">
+            <div>
+              <label>{'.'}</label>
+            </div>
+            <input type="text" name="id" hidden="true" readOnly />
+            <div className="main">
+              <div className="item">
+                <label>FirstName:</label>
+                <input
                   type="text"
                   name="firstName"
-                   />
-              
-                <span>
-                  <ErrorMessage className="user-form-error" name="firstName" component="div" />
-                </span>
-              </label>
-              <label className='user-form-label'>
-                {" "}
-                LastName:
-                <Field className='user-form-input'
+                  value={this.state.firstName}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div>
+                <input
+                  className="lbl-erro"
+                  value={this.state.errFirstName}
+                  disabled
+                  readOnly
+                />
+              </div>
+              <div className="item">
+                <label>LastName:</label>
+                <input
                   type="text"
                   name="lastName"
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
                 />
-                <span>
-                  <ErrorMessage className="user-form-error" name="lastName" component="div" />
-                </span>
-              </label>
-              <label className='user-form-label'>
-                {" "}
-                Email:
-                <Field className='user-form-input'
+              </div>
+              <div>
+                <input
+                  className="lbl-erro"
+                  value={this.state.errLastName}
+                  readOnly
+                  disabled
+                />
+              </div>
+              <div className="item">
+                <label>Email:</label>
+                <input
                   type="email"
                   name="emailId"
+                  value={this.state.emailId}
+                  onChange={this.handleChange}
                 />
-                <span>
-                  <ErrorMessage className="user-form-error" name="emailId" component="div" />
-                </span>
-              </label>
-              <label className='user-form-label'>
-                {" "}
-                Login:
-                <Field className='user-form-input'
+              </div>
+              <div>
+                <input
+                  className="lbl-erro"
+                  value={this.state.errEmailId}
+                  readOnly
+                  disabled
+                />
+              </div>
+              <div className="item">
+                <label>Login:</label>
+                <input
                   type="text"
                   name="login"
+                  value={this.state.login}
+                  onChange={this.handleChange}
                 />
-                <span>
-                  <ErrorMessage className="user-form-error" name="login" component="div" />
-                </span>
-              </label>
-              <label className='user-form-label'>
-                {" "}
-                Senha:
-                <Field className='user-form-input'
+              </div>
+              <div>
+                <input
+                  className="lbl-erro"
+                  value={this.state.errLogin}
+                  readOnly
+                  disabled
+                />
+              </div>
+              <div className="item">
+                <label>Senha:</label>
+                <input
                   type="password"
                   name="senha"
                   autoComplete="false"
+                  value={this.state.senha}
+                  onChange={this.handleChange}
                 />
-                <span>
-                  <ErrorMessage className="user-form-error" name="senha" component="div" />
-                </span>
-              </label>
-              <label className='user-form-label'>
-                {" "}
-                Repetir a senha:
-                <Field className='user-form-input'
+              </div>
+              <div>
+                <input
+                  className="lbl-erro"
+                  value={this.state.errSenha}
+                  disabled
+                  readOnly
+                />
+              </div>
+              <div className="item">
+                <label>Repetir a senha:</label>
+                <input
                   type="password"
                   name="repeatSenha"
                   autoComplete="false"
+                  value={this.state.repeatSenha}
+                  onChange={this.handleChange}
                 />
-                <span>
-                  <ErrorMessage className="user-form-error" name="repeatSenha" component="div" />
-                </span>
-              </label>
-            </div>
-              <div>
-                <button
-                  type="submit"
-                  className="btn btn-user-form-submit"
-                  disabled={isSubmitting}
-                >
-                  Submit
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-user-form-cancel"
-                  onClick={this.handleCancel}
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </button>
               </div>
-            </Form>
-          )}
-        </Formik>
+              <div>
+                <input
+                  className="lbl-erro"
+                  value={this.state.errRepeatSenha}
+                  disabled
+                  readOnly
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className="div-btn">
+          <button
+            type="submit"
+            className="btn btn-submit"
+            onClick={this.handleSubmit}
+          >
+            Submit
+          </button>
+          <button
+            type="submit"
+            className="btn btn-cancel"
+            onClick={this.handleCancel}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     );
   }
