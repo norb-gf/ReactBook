@@ -43,10 +43,12 @@ td{
   margin-left: 1rem;
   font-size: 1rem;
 }
+
 .btn-search{
   position: absolute;
   left: 24.5rem;
   top: 3.23rem;
+  border-bottom: 5px;
 }
 
 .place-right{
@@ -54,4 +56,20 @@ td{
   top: 3.23rem;
   right: 4.5rem;
   margin-left: 20rem;
+}
+
+#trash{
+  background-color: rgba(255, 255, 255, 0.027);
+
+}
+#trash:hover{
+  background: rgba(255, 255, 0, 0.836);
+  height: 1.9rem;
+}
+#upd{
+  background-color: rgba(255, 255, 255, 0);
+}
+#upd:hover{
+  background: rgba(43, 255, 0, 0.418);
+  height: 1.8rem;
 }

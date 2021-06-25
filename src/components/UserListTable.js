@@ -4,6 +4,8 @@ import ReactLoading from "react-loading";
 import formataData from "../utils/FormataData";
 
 import "../css/stylesUserListTable.css";
+import  Trash from "../img/trash.svg";
+import  Update from "../img/update.svg";
 
 class UserListTable extends Component {
   constructor(props) {
@@ -88,20 +90,32 @@ class UserListTable extends Component {
         <td>{user.login}</td>
         <td className="td-center">{formataData(user.dataUltAlt)}</td>
         <td className="td-center">
-          <button
+          {/* <button
             className="btn btn-small"
             onClick={this.editUser.bind(this, user)}
           >
             Upd
-          </button>
+          </button> */}
+          <img  
+            src={Update}
+            id='upd'
+            alt='update svg' 
+            height={23}
+            onClick={this.editUser.bind(this,user,index)}/>
         </td>
         <td className="td-center">
-          <button
+          {/* <button
             onClick={this.delUser.bind(this, user, index)}
             className="btn btn-small"
           >
             Del
-          </button>
+          </button> */}
+          <img  
+            src={Trash}
+            id='trash'
+            alt='trash svg' 
+            height={30}
+            onClick={this.delUser.bind(this,user,index)}/>
         </td>
       </tr>
     ));

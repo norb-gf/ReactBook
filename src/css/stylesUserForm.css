@@ -43,9 +43,9 @@ input {
 }
 
 input:focus {
-  /* border: 2px solid black; */
   border-radius: 4px;
-  box-shadow: 0 0 1rem gray;
+  box-shadow: 0 0 5px gray;
+  border: 2px solid blue;
 }
 
 h1{
